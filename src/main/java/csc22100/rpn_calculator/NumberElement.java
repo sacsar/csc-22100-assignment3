@@ -21,7 +21,7 @@ public class NumberElement implements Element {
     }
 
     @Override
-    public Stack<Element> process(Stack<Element> stack) {
-        return null;
+    public Stack<Element> apply(Stack<Element> stack) {
+        throw new RpnException();
     }
 }

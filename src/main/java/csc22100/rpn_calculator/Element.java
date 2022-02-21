@@ -8,5 +8,5 @@ public interface Element {
 
     double getValue();
 
-    Stack<Element> process(Stack<Element> stack);
+    Stack<Element> apply(Stack<Element> stack);
 }

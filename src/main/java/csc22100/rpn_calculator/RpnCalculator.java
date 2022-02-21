@@ -1,16 +1,38 @@
 package csc22100.rpn_calculator;
 
+import java.util.List;
 import java.util.Stack;
 
 public class RpnCalculator {
 
-    public double calculate(Stack<Element> elements) {
-        while (elements.size() > 1) {
-            Element element = elements.pop();
-            elements = element.process(elements);
+    private Stack<Element> stack = new Stack<>();
+
+    public void push(Element element) {
+        if (element == null) {
+            // duplicate the last element on the stack
+            Element lastElt = stack.peek();
+            stack.push(lastElt);
+        } else if (element.isOperator()) {
+            stack = element.apply(stack);
+        } else {
+            stack.push(element);
         }
-        // then when we're done, the last element on the stack better be a number and we return it
-        Element finalElement = elements.pop();
-        return finalElement.getValue();
+    }
+
+    public void pushAll(List<Element> elements) {
+        for (Element el : elements) {
+            push(el);
+        }
+    }
+
+    public boolean completed() {
+        return stack.size() == 1;
+    }
+
+    public double getResult() {
+        if (!completed()) {
+            throw new IllegalStateException("Calculation is not complete!");
+        }
+        return stack.get(0).getValue();
     }
 }
