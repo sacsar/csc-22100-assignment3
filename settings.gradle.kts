@@ -8,3 +8,5 @@
  */
 
 rootProject.name = "rpn_calculator"
+include("calculator")
+include("cli")

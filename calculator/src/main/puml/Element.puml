@@ -2,9 +2,9 @@
 'https://plantuml.com/class-diagram
 
 interface Element {
-  + boolean isOperator()
   + double getValue()
-  + Stack<Element> apply(Stack<Element> stack)
+  + Stack<Element> accept(Stack<Element> stack)
+  + String toDisplayString()
 }
 
 class NumberElement implements Element {
@@ -12,15 +12,19 @@ class NumberElement implements Element {
   + NumberElement(double value)
 }
 
-abstract class OperatorElement implements Element {
-  + boolean isOperator()
+interface OperatorElement implements Element {
+  + String getToken()
 }
 
 enum BinaryOperator extends OperatorElement {
+  - token: String
   + PLUS
   + MINUS
   + TIMES
   + DIVIDE
+  + String getToken()
+  double apply(double a, double b)
+
 }
 enum UnaryOperator extends OperatorElement {
   + SIN

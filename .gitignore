@@ -8,3 +8,8 @@ build
 .idea
 .project
 .settings
+
+*.log
+
+bin
+.classpath
