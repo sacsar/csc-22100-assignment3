@@ -55,7 +55,7 @@ can use the `run.sh` or `run.bat` scripts. (I haven't tested `run.bat`. Let me k
 
 Your task in this assignment is to complete thee implementation of `RpnCalculator` by doing the following:
 
-- implementing `apply` in `BinaryOperator`
+- implementing `accept` (*not* `apply`) in `BinaryOperator`
 - implementing the `UnaryOperator` so that:
     - it extends `OperatorElement`
     - it supports `SIN` and `COS` operators
