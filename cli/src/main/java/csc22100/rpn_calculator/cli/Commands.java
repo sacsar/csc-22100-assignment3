@@ -24,19 +24,18 @@ public class Commands {
     @Autowired
     private RpnCalculator calculator;
 
-    @Autowired
-    private RpnStackDisplayer rpnStackDisplayer;
+    @Autowired RpnStackDisplayer rpnStackDisplayer;
 
     @ShellMethod(value="print the calculator's current stack")
     public void show() {
-        rpnStackDisplayer.showStack();
+        System.out.println(calculator.getStackString());
     }
 
     public void processToken(String token) throws ParseException {
         Element element = matchToken(token);
         calculator.push(element);
 
-        show();
+        rpnStackDisplayer.showStack();
     }
 
     Element matchToken(String token) throws ParseException {
@@ -45,7 +44,7 @@ public class Commands {
             return numberElementOpt.get();
         } else {
             // we ought to have an operator
-            Optional<OperatorElement> matchedOperator = OPERATORS.stream().filter(x -> x.getToken().equals(token)).findFirst();
+            Optional<OperatorElement> matchedOperator = OPERATORS.stream().filter(x -> x.getToken().equalsIgnoreCase(token)).findFirst();
             if (matchedOperator.isEmpty()) {
                 throw new ParseException(String.format("Unable to parse input %s", token), 0);
             }
