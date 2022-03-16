@@ -39,11 +39,11 @@ tasks.register<Zip>("packageAssignment") {
 tasks.register<Copy>("copyZip") {
     from(tasks.getByName<Zip>("packageAssignment").outputs)
 
-    destinationDir = layout.projectDirectory.asFile
+    destinationDir = File(rootProject.projectDir.toString())
 }
 
 tasks.register<JavaExec>("source2pdf") {
-    classpath = files("${project.projectDir}/source2pdf-all.jar")
+    classpath = files("${rootProject.projectDir}/source2pdf-all.jar")
 
-    args = listOf("src", "-o", "./$YOUR_NAME.pdf")
+    args = listOf("src", "-o", "${rootProject.projectDir}/$YOUR_NAME.pdf")
 }
